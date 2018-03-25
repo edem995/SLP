@@ -1,11 +1,11 @@
 ;;; Задание 3
 ;;; Сенанов
 ;;; Заменить в исходном списке все вхождения заданного значения другим
-(defun rep (lst w r) 
+(defun rep (lst lst2 lst3) 
   (cond ((null lst) nil)
-        ((equal (car lst) w) (cons r (rep (cdr lst) w r)))
-        ((listp (car lst)) (cons (rep (car lst) w r) (rep (cdr lst) w r)))
-        (t (cons  (car lst) (rep (cdr lst) w r)))))
+        ((equal (car lst) lst2) (cons lst3 (rep (cdr lst) lst2 lst3)))
+        ((listp (car lst)) (cons (rep (car lst) lst2 lst3) (rep (cdr lst) lst2 lst3)))
+        (t (cons  (car lst) (rep (cdr lst) lst2 lst3)))))
 ;;; (rep `(1 2 3 ((( 1 2 3) ( 1 2 3)))) 1 `a)
 ;;; (A 2 3 (((A 2 3) (A 2 3))))
 
