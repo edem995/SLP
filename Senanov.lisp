@@ -2,10 +2,11 @@
 ;;; Сенанов
 ;;; Заменить в исходном списке все вхождения заданного значения другим
 (defun rep (lst lst2 lst3) 
+((lambda (x y)
   (cond ((null lst) nil)
-        ((equal (car lst) lst2) (cons lst3 (rep (cdr lst) lst2 lst3)))
-        ((listp (car lst)) (cons (rep (car lst) lst2 lst3) (rep (cdr lst) lst2 lst3)))
-        (t (cons  (car lst) (rep (cdr lst) lst2 lst3)))))
+        ((equal x lst2) (cons lst3 (rep y lst2 lst3)))
+        ((listp x) (cons (rep x lst2 lst3) (rep y lst2 lst3)))
+        (t (cons  x (rep y lst2 lst3))))) (car lst) (cdr lst)))
 ;;; (rep `(1 2 3 ((( 1 2 3) ( 1 2 3)))) 1 `a)
 ;;; (A 2 3 (((A 2 3) (A 2 3))))
 
