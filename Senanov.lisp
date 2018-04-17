@@ -7,6 +7,18 @@
         ((equal x lst2) (cons lst3 (rep y lst2 lst3)))
         ((listp x) (cons (rep x lst2 lst3) (rep y lst2 lst3)))
         (t (cons  x (rep y lst2 lst3))))) (car lst) (cdr lst)))
+
+
+
+(defun rep (lst w r)
+  ((lambda (x)
+           (when (not (null x))
+             ((lambda (z)
+                      (cond
+                        ((equal x w) (cons r z))
+                        ((listp x) (cons (rep x w r)z))
+                        (t (cons x z))))
+              (rep (cdr lst) w r)))) (car lst)))
 ;;; (rep `(1 2 3 ((( 1 2 3) ( 1 2 3)))) 1 `a)
 ;;; (A 2 3 (((A 2 3) (A 2 3))))
 
@@ -94,12 +106,10 @@
 ;;; Сенанов
 ;;; Определите функцию, которая обращает список (а b с) и разбивает его на уровни (((с) b) а)
 (defun разбить_и_перевернуть (lst)
-  (cond ((null lst) nil)
-        (t
-         ((lambda (x y)
-            (cond ((null y) (list x))
-                  (t (cons (cons (car y) (cdr y)) (list x)))))
-          (car lst) (разбить_и_перевернуть (cdr lst))))))
+ (if (null (cdr lst))
+     lst
+     (list (разбить_и_перевернуть (cdr lst)) (car lst))
+          
 ;;;
 ;;; (разбить_и_перевернуть `(1 2 3 4))
 ;;; ((((4) 3) 2) 1)
