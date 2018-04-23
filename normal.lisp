@@ -10,15 +10,15 @@
 
 
 
-(defun rep (lst w r)
+(defun rep (lst заменить_с заменить_на)
   ((lambda (x)
            (when (not (null x))
              ((lambda (z)
                       (cond
-                        ((equal x w) (cons r z))
-                        ((listp x) (cons (rep x w r)z))
+                        ((equal x заменить_с) (cons заменить_на z))
+                        ((listp x) (cons (rep x заменить_с заменить_на)z))
                         (t (cons x z))))
-              (rep (cdr lst) w r)))) (car lst)))
+              (rep (cdr lst) заменить_с заменить_на)))) (car lst)))
 ;;; (rep `(1 2 3 ((( 1 2 3) ( 1 2 3)))) 1 `a)
 ;;; (A 2 3 (((A 2 3) (A 2 3))))
 
